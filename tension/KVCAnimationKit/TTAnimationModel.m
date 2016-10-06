@@ -78,6 +78,7 @@
 
                     _originalValue = [[targetObj valueForKey:keys[i]] valueForBaseType:_valueType];
                     _sel = [targetObj impSetter:&_imp property:key];
+
                 } else {
 
                     NSString * var     = [NSString stringWithFormat:@"_%@", key];
@@ -94,17 +95,18 @@
                 } else {
 
                     CGKeyPathType cgType = CGTypeForKey([keys.lastObject UTF8String]);
+
                     NSAssert(cgType != CGKeyPathTypeInvalid, @"the key %@ does not exist", keys.lastObject);
+
                     void * original = CGValueForValueBaseTypeKeyPathType(_originalValue, valueType, cgType);
                     void * target = [value valueForKeyPathType:cgType];
                     TTCGModel * cgmoedel = [[TTCGModel alloc] initWithOriginal:original target:target keyPathTyep:cgType];
                     self.cgModel = cgmoedel;
+
                 }
 
                 break;
             }
-
-
 
             targetObj = [targetObj valueForKey:key];
             NSAssert1(targetObj != nil, @"the value for key %@ could not be nil.", key);

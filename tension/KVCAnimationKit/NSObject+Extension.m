@@ -81,6 +81,7 @@ extern unsigned int BKDRHash(const char* str);
 
     objc_property_t property = class_getProperty([self class], [key UTF8String]);
     if (property != NULL) {
+        *isProperty = YES;
         return [self typeForProperty:property];
     }
 
