@@ -113,8 +113,6 @@ extern unsigned int BKDRHash(const char* str);
     }
 
 
-
-
     Ivar ivar = class_getInstanceVariable([self class], [[NSString stringWithFormat:@"_%@", key] UTF8String]);
     *isProperty = NO;
     return [self ivarTypeForIvar:ivar];

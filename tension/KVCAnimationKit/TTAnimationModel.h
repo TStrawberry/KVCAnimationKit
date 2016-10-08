@@ -8,7 +8,6 @@
 
 
 #import <Foundation/Foundation.h>
-#import <objc/objc-runtime.h>
 #import "NSObject+Extension.h"
 
 @class TTAnimationModel;

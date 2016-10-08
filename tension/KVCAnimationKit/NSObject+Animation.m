@@ -9,7 +9,6 @@
 #import "NSObject+Animation.h"
 
 #import <UIKit/UIKit.h>
-#import <objc/objc-runtime.h>
 #import "TTDisplayLink.h"
 
 @interface NSObject()
@@ -60,7 +59,6 @@ static char * DISPLAY_LINK_NAME = "displayLink";
     if (self.displayLink.paused == YES) {
         self.displayLink.paused = NO;
     }
-    
 }
 
 -(void) updateKeyPath:(CADisplayLink *)displayLink {

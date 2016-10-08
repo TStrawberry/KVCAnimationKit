@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:tension.xcodeproj">
+      location = "self:/Users/tangtao/Documents/GitHub/KVCAnimationKit/KVCAnimationKit.xcodeproj">
    </FileRef>
 </Workspace>

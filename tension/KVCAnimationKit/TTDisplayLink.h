@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "NSObject+Extension.h"
-#import <objc/objc-runtime.h>
 
 @interface TTDisplayLink : NSObject
 

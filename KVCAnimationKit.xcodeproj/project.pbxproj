@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		964242141D82E47B008C9A18 /* tension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tension.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		964242141D82E47B008C9A18 /* KVCAnimationKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KVCAnimationKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		964242181D82E47B008C9A18 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9642421A1D82E47B008C9A18 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9642421B1D82E47B008C9A18 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		9642420B1D82E47A008C9A18 = {
 			isa = PBXGroup;
 			children = (
-				964242161D82E47B008C9A18 /* tension */,
+				964242161D82E47B008C9A18 /* KVCAnimationKit */,
 				964242151D82E47B008C9A18 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,12 +73,12 @@
 		964242151D82E47B008C9A18 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				964242141D82E47B008C9A18 /* tension.app */,
+				964242141D82E47B008C9A18 /* KVCAnimationKit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		964242161D82E47B008C9A18 /* tension */ = {
+		964242161D82E47B008C9A18 /* KVCAnimationKit */ = {
 			isa = PBXGroup;
 			children = (
 				9642421A1D82E47B008C9A18 /* AppDelegate.h */,
@@ -94,6 +94,7 @@
 				965BC8521DA6316F009314F9 /* KVCAnimationKit */,
 				964242171D82E47B008C9A18 /* Supporting Files */,
 			);
+			name = KVCAnimationKit;
 			path = tension;
 			sourceTree = "<group>";
 		};
@@ -129,9 +130,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		964242131D82E47A008C9A18 /* tension */ = {
+		964242131D82E47A008C9A18 /* KVCAnimationKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9642422B1D82E47B008C9A18 /* Build configuration list for PBXNativeTarget "tension" */;
+			buildConfigurationList = 9642422B1D82E47B008C9A18 /* Build configuration list for PBXNativeTarget "KVCAnimationKit" */;
 			buildPhases = (
 				964242101D82E47A008C9A18 /* Sources */,
 				964242111D82E47A008C9A18 /* Frameworks */,
@@ -141,9 +142,9 @@
 			);
 			dependencies = (
 			);
-			name = tension;
+			name = KVCAnimationKit;
 			productName = tension;
-			productReference = 964242141D82E47B008C9A18 /* tension.app */;
+			productReference = 964242141D82E47B008C9A18 /* KVCAnimationKit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -157,10 +158,11 @@
 				TargetAttributes = {
 					964242131D82E47A008C9A18 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 2D4G4343X5;
 					};
 				};
 			};
-			buildConfigurationList = 9642420F1D82E47A008C9A18 /* Build configuration list for PBXProject "tension" */;
+			buildConfigurationList = 9642420F1D82E47A008C9A18 /* Build configuration list for PBXProject "KVCAnimationKit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -173,7 +175,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				964242131D82E47A008C9A18 /* tension */,
+				964242131D82E47A008C9A18 /* KVCAnimationKit */,
 			);
 		};
 /* End PBXProject section */
@@ -321,6 +323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2D4G4343X5;
 				INFOPLIST_FILE = tension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tangtao.tension;
@@ -332,6 +335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2D4G4343X5;
 				INFOPLIST_FILE = tension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tangtao.tension;
@@ -342,7 +346,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9642420F1D82E47A008C9A18 /* Build configuration list for PBXProject "tension" */ = {
+		9642420F1D82E47A008C9A18 /* Build configuration list for PBXProject "KVCAnimationKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				964242291D82E47B008C9A18 /* Debug */,
@@ -351,7 +355,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9642422B1D82E47B008C9A18 /* Build configuration list for PBXNativeTarget "tension" */ = {
+		9642422B1D82E47B008C9A18 /* Build configuration list for PBXNativeTarget "KVCAnimationKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9642422C1D82E47B008C9A18 /* Debug */,

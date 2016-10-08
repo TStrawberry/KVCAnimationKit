@@ -125,24 +125,26 @@
 
 - (void) animation {
 
+
+    __weak typeof(self) weakSelf = self;
+
     [self.queue addOperationWithBlock:^{
 
         _timeCounter += 1;
         if (_timeCounter >= _animationDuration * 60) {
             
-            [self setCurrentValueForProgress:1];
+            [weakSelf setCurrentValueForProgress:1];
 
             if (_completion) {
                 _completion();
             }
 
-            [self.delegate animationModelDidFinish:self];
+            [weakSelf.delegate animationModelDidFinish:self];
             return;
         }
-
+        
         double progress = _timeCounter / (_animationDuration * 60.0);
-        [self setCurrentValueForProgress:progress];
-
+        [weakSelf setCurrentValueForProgress:progress];
     }];
 
 }

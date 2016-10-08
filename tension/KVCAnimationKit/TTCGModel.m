@@ -9,7 +9,6 @@
 #import "TTCGModel.h"
 #import "NSObject+Extension.h"
 #import "CGRect+Extension.h"
-#import <objc/objc-runtime.h>
 
 @interface TTCGModel()
 
