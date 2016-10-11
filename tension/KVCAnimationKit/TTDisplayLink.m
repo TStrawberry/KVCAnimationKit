@@ -77,7 +77,7 @@
             return;
         }
     }
-
+    
     TTAnimationModel * model = [TTAnimationModel animationModelWithObj:obj value:value keyPath:keyPath duration:duration inQueue:queue progress:progress completion:completion];
     model.hashValue = [keyPath hash];
     model.delegate = self;

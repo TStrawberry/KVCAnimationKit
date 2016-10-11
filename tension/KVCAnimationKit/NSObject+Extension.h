@@ -12,6 +12,9 @@
 
 @interface NSObject (Extension)
 
+
+-(void) updateAnimationDataForValue:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion;
+
 -(Ivar) ivarKeyPath:(NSString *)keyPath;
 -(TTBaseType)ivarTypeForName:(NSString *)name;
 -(TTBaseType) ivarTypeForIvar:(Ivar)ivar;
@@ -26,7 +29,5 @@
 
 -(void *) valueForKeyPathType:(CGKeyPathType)keyPathType;
 -(void *) valueForBaseType:(TTBaseType)baseType;
-
-
 
 @end

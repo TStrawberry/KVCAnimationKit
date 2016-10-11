@@ -8,34 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class TTExtraConfig;
+
 @interface NSObject (Animation)
 
--(void)  setValue:(id)value
+-(TTExtraConfig *)  setValue:(id)value
        forKeyPath:(NSString *)keyPath
           duraion:(NSTimeInterval)duration;
-
--(void)  setValue:(id)value
-      forKeyPath:(NSString *)keyPath
-         duraion:(NSTimeInterval)duration
-        progress:(void(^)(double progress, id currenValue))progress
-      completion:(void(^)(void))completion;
-
--(void) setValue:(id)value
-      forKeyPath:(NSString *)keyPath
-         duraion:(NSTimeInterval)duration
-         inQueue:(NSOperationQueue *)queue;
-
--(void) setValue:(id)value
-      forKeyPath:(NSString *)keyPath
-         duraion:(NSTimeInterval)duration
-         inQueue:(NSOperationQueue *)queue
-        progress:(void(^)(double progress, id currenValue))progress
-      completion:(void(^)(void))completion;
-
 
 /**
  用于对动画数据进行清理, 如果确定不需要再调用以上接口了, 应该手动调用此方法.
  */
--(void) invalidateAnimationData;
+//-(void) invalidateAnimationData;
 
 @end

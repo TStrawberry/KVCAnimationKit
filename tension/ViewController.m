@@ -24,18 +24,20 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 
-    __weak typeof(self) weakSelf = self;
+    [[[[self.orangeView setValue:[NSValue valueWithCGSize:CGSizeMake(300, 200)] forKeyPath:@"bounds.size" duraion:2.0] withProgress:^(double progress, id currenValue) {
 
-    [self.orangeView setValue:[NSValue valueWithCGSize:CGSizeMake(300, 200)] forKeyPath:@"bounds.size" duraion:2.0];
-    [self setValue:@400 forKeyPath:@"orangeView.center.y" duraion:1.5];
-    [self setValue:@0.2 forKeyPath:@"blueView.alpha" duraion:2.0];
-    [self setValue:[NSValue valueWithCGPoint:CGPointMake(120, 70)] forKeyPath:@"redView.frame.origin" duraion:3.0];
-    [self setValue:@130 forKeyPath:@"blackView.frame.origin.x" duraion:1.5 progress:^(double progress, id currenValue) {
-
-    } completion:^{
-
-        [weakSelf invalidateAnimationData];
-    }];
+        NSLog(@"%@", currenValue);
+    }] withCompletion:^{
+        NSLog(@"withCompletion");
+    }] commit];
+    
+    [[self.orangeView setValue:[NSValue valueWithCGSize:CGSizeMake(300, 200)] forKeyPath:@"bounds.size" duraion:2.0] commit];
+    [[self setValue:@400 forKeyPath:@"orangeView.center.y" duraion:1.5] commit];
+    [[self setValue:@0.2 forKeyPath:@"blueView.alpha" duraion:2.0] commit];
+    [[self setValue:[NSValue valueWithCGPoint:CGPointMake(120, 70)] forKeyPath:@"redView.frame.origin" duraion:3.0] commit];
+    [[[self setValue:@130 forKeyPath:@"blackView.frame.origin.x" duraion:1.5] withCompletion:^{
+        NSLog(@"*********");
+    }] commit];
 
 }
 

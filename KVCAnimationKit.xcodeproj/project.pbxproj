@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		962FDBE31DACE3EB00BAC2FB /* TTExtraConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 962FDBE21DACE3EB00BAC2FB /* TTExtraConfig.m */; };
 		964242191D82E47B008C9A18 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 964242181D82E47B008C9A18 /* main.m */; };
 		9642421C1D82E47B008C9A18 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9642421B1D82E47B008C9A18 /* AppDelegate.m */; };
 		9642421F1D82E47B008C9A18 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9642421E1D82E47B008C9A18 /* ViewController.m */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		962FDBE11DACE3EB00BAC2FB /* TTExtraConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTExtraConfig.h; sourceTree = "<group>"; };
+		962FDBE21DACE3EB00BAC2FB /* TTExtraConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTExtraConfig.m; sourceTree = "<group>"; };
 		964242141D82E47B008C9A18 /* KVCAnimationKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KVCAnimationKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		964242181D82E47B008C9A18 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9642421A1D82E47B008C9A18 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -112,14 +115,16 @@
 				965BC8661DA63211009314F9 /* KVCAnimationKit.h */,
 				965BC8561DA6316F009314F9 /* NSObject+Animation.h */,
 				965BC8571DA6316F009314F9 /* NSObject+Animation.m */,
+				962FDBE11DACE3EB00BAC2FB /* TTExtraConfig.h */,
+				962FDBE21DACE3EB00BAC2FB /* TTExtraConfig.m */,
 				965BC8581DA6316F009314F9 /* NSObject+Extension.h */,
 				965BC8591DA6316F009314F9 /* NSObject+Extension.m */,
+				965BC85E1DA6316F009314F9 /* TTDisplayLink.h */,
+				965BC85F1DA6316F009314F9 /* TTDisplayLink.m */,
 				965BC85A1DA6316F009314F9 /* TTAnimationModel.h */,
 				965BC85B1DA6316F009314F9 /* TTAnimationModel.m */,
 				965BC85C1DA6316F009314F9 /* TTCGModel.h */,
 				965BC85D1DA6316F009314F9 /* TTCGModel.m */,
-				965BC85E1DA6316F009314F9 /* TTDisplayLink.h */,
-				965BC85F1DA6316F009314F9 /* TTDisplayLink.m */,
 				965BC8541DA6316F009314F9 /* CGRect+Extension.h */,
 				965BC8531DA6316F009314F9 /* CGRect+Extension.c */,
 				965BC8551DA6316F009314F9 /* GlobleEnum.h */,
@@ -204,6 +209,7 @@
 				9642421F1D82E47B008C9A18 /* ViewController.m in Sources */,
 				965BC8651DA6316F009314F9 /* TTDisplayLink.m in Sources */,
 				9642421C1D82E47B008C9A18 /* AppDelegate.m in Sources */,
+				962FDBE31DACE3EB00BAC2FB /* TTExtraConfig.m in Sources */,
 				965BC8621DA6316F009314F9 /* NSObject+Extension.m in Sources */,
 				965BC8631DA6316F009314F9 /* TTAnimationModel.m in Sources */,
 				964242191D82E47B008C9A18 /* main.m in Sources */,

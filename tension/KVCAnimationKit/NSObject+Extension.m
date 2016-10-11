@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "NSObject+Extension.h"
+#import "TTDisplayLink.h"
+#import "TTAnimationModel.h"
+
+
 
 #define StatementVoidPointer(target) void * target = NULL
 
@@ -16,11 +20,50 @@
                                                                 target = malloc(size); \
                                                                 memcpy(target, &value, size);
 
+static char * DISPLAY_LINK_NAME = "displayLink";
 
+
+
+@interface NSObject()
+
+@property(nonatomic, strong, readonly) TTDisplayLink * displayLink;
+
+@end
 
 @implementation NSObject (Extension)
 
 extern unsigned int BKDRHash(const char* str);
+
+-(TTDisplayLink *)displayLink {
+
+    TTDisplayLink * displayLink = objc_getAssociatedObject(self, DISPLAY_LINK_NAME);
+    if (displayLink == nil) {
+        displayLink = [TTDisplayLink displayLinkWithTarget:self selector:@selector(updateKeyPath:)];
+        objc_setAssociatedObject(self, DISPLAY_LINK_NAME, displayLink, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return displayLink;
+}
+
+-(void) updateAnimationDataForValue:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion {
+
+    [self.displayLink updateAnimationDataForObj:self value:value keyPath:keyPath duration:duration inQueue:queue progress:progress completion:completion];
+
+    if (self.displayLink.paused) {
+        self.displayLink.paused = NO;
+    }
+}
+
+-(void) updateKeyPath:(CADisplayLink *)displayLink {
+
+    [self.displayLink animation];
+}
+
+-(void) invalidateAnimationData {
+
+    objc_setAssociatedObject(self, DISPLAY_LINK_NAME, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
 
 -(Ivar) ivarKeyPath:(NSString *)keyPath {
 
@@ -87,7 +130,12 @@ extern unsigned int BKDRHash(const char* str);
 
     SEL keySetter = [self impSetter:NULL property:key];
     Method keyMethod = class_getInstanceMethod([self class], keySetter);
-    NSString * typeStr = [NSString stringWithFormat:@"T%s", method_copyArgumentType(keyMethod, 2)];
+
+    char * argumentType = method_copyArgumentType(keyMethod, 2);
+    NSString * typeStr = [NSString stringWithFormat:@"T%s", argumentType];
+    free(argumentType);
+//    free(keyMethod);
+
     if (typeStr) {
         
         TTBaseType type = BKDRHash([typeStr UTF8String]);

@@ -8,3 +8,4 @@
 
 
 #import "NSObject+Animation.h"
+#import "TTExtraConfig.h"
