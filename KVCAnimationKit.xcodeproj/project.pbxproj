@@ -20,7 +20,6 @@
 		965BC8631DA6316F009314F9 /* TTAnimationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 965BC85B1DA6316F009314F9 /* TTAnimationModel.m */; };
 		965BC8641DA6316F009314F9 /* TTCGModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 965BC85D1DA6316F009314F9 /* TTCGModel.m */; };
 		965BC8651DA6316F009314F9 /* TTDisplayLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 965BC85F1DA6316F009314F9 /* TTDisplayLink.m */; };
-		967E0B981D92923F0048001B /* TTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967E0B971D92923F0048001B /* TTViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,8 +49,6 @@
 		965BC85E1DA6316F009314F9 /* TTDisplayLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDisplayLink.h; sourceTree = "<group>"; };
 		965BC85F1DA6316F009314F9 /* TTDisplayLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDisplayLink.m; sourceTree = "<group>"; };
 		965BC8661DA63211009314F9 /* KVCAnimationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVCAnimationKit.h; sourceTree = "<group>"; };
-		967E0B961D92923F0048001B /* TTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTViewController.h; sourceTree = "<group>"; };
-		967E0B971D92923F0048001B /* TTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +83,6 @@
 			children = (
 				9642421A1D82E47B008C9A18 /* AppDelegate.h */,
 				9642421B1D82E47B008C9A18 /* AppDelegate.m */,
-				967E0B961D92923F0048001B /* TTViewController.h */,
-				967E0B971D92923F0048001B /* TTViewController.m */,
 				9642421D1D82E47B008C9A18 /* ViewController.h */,
 				9642421E1D82E47B008C9A18 /* ViewController.m */,
 				964242201D82E47B008C9A18 /* Main.storyboard */,
@@ -204,7 +199,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				965BC8601DA6316F009314F9 /* CGRect+Extension.c in Sources */,
-				967E0B981D92923F0048001B /* TTViewController.m in Sources */,
 				965BC8611DA6316F009314F9 /* NSObject+Animation.m in Sources */,
 				9642421F1D82E47B008C9A18 /* ViewController.m in Sources */,
 				965BC8651DA6316F009314F9 /* TTDisplayLink.m in Sources */,

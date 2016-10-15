@@ -14,6 +14,7 @@
 #import "NSObject+Extension.h"
 #import "CGRect+Extension.h"
 
+
 @interface TTAnimationModel(){
 
     void * _varAddress;
@@ -29,99 +30,86 @@
 @property(nonatomic, assign) TTBaseType valueType;
 @property(nonatomic, copy) NSString * key;
 @property(nonatomic, weak) id objOfIvar;
-@property(nonatomic, assign) NSTimeInterval animationDuration;
 
 @property(nonatomic, assign) NSUInteger timeCounter;
-@property(nonatomic, strong) NSOperationQueue * queue;
-
-@property(nonatomic, copy) void (^progress)(double, id);
-@property(nonatomic, copy) void (^completion)(void);
 
 @end
 
 @implementation TTAnimationModel
 
--(instancetype) initWithObj:(id)obj value:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion {
+-(void)setKeyPath:(NSString *)keyPath {
 
-    if (self = [super init]) {
+    _keyPath = keyPath;
+    self.hashValue = [keyPath hash];
+}
 
-        _progress = progress;
-        _completion = completion;
+-(void)initialData {
 
-        self.queue = queue;
-        self.animationDuration = duration;
-        id targetObj = obj;
+    id targetObj = _animationObj;
 
-        // 所有的key
-        NSArray <NSString *> * keys = [keyPath componentsSeparatedByString:@"."];
+    // 所有的key
+    NSArray <NSString *> * keys = [self.keyPath componentsSeparatedByString:@"."];
 
-        for(int i = 0; i < keys.count; i++) {
+    for(int i = 0; i < keys.count; i++) {
 
-            NSString * key = keys[i];
+        NSString * key = keys[i];
 
-            self.objOfIvar     = targetObj;
-            TTBaseType valueType = TTBaseTypeInvalid;
-            BOOL isProperty = NO;
-            valueType = [targetObj typeWithKey:key isProperty:&isProperty];
+        self.objOfIvar     = targetObj;
+        TTBaseType valueType = TTBaseTypeInvalid;
+        BOOL isProperty = NO;
+        valueType = [targetObj typeWithKey:key isProperty:&isProperty];
 
-            if (valueType == TTBaseTypeIvarCGRect ||
-                valueType == TTBaseTypeIvarCGPoint ||
-                valueType == TTBaseTypeIvarCGSize ||
-                valueType == TTBaseTypePropertyCGRect ||
-                valueType == TTBaseTypePropertyCGPoint ||
-                valueType == TTBaseTypePropertyCGSize ||
-                i == keys.count - 1) {
+        if (valueType == TTBaseTypeIvarCGRect ||
+            valueType == TTBaseTypeIvarCGPoint ||
+            valueType == TTBaseTypeIvarCGSize ||
+            valueType == TTBaseTypePropertyCGRect ||
+            valueType == TTBaseTypePropertyCGPoint ||
+            valueType == TTBaseTypePropertyCGSize ||
+            i == keys.count - 1) {
 
-                self.valueType = valueType;
+            self.valueType = valueType;
 
-                if (isProperty) {
+            if (isProperty) {
 
-                    _originalValue = [[targetObj valueForKey:keys[i]] valueForBaseType:_valueType];
-                    _sel = [targetObj impSetter:&_imp property:key];
+                _originalValue = [[targetObj valueForKey:keys[i]] valueForBaseType:_valueType];
+                _sel = [targetObj impSetter:&_imp property:key];
 
-                } else {
+            } else {
 
-                    NSString * var     = [NSString stringWithFormat:@"_%@", key];
-                    Ivar ivar          = class_getInstanceVariable([targetObj class], [var UTF8String]);
-                    _originalValue = [targetObj getValueInIvar:ivar valueType:_valueType];
-                    _varAddress = [targetObj getIvarHead:ivar];
-                }
-
-
-                if (i == keys.count - 1) {
-
-                    _targetValue = [value valueForBaseType:_valueType];
-
-                } else {
-
-                    CGKeyPathType cgType = CGTypeForKey([keys.lastObject UTF8String]);
-
-                    NSAssert(cgType != CGKeyPathTypeInvalid, @"the key %@ does not exist", keys.lastObject);
-
-                    void * original = CGValueForValueBaseTypeKeyPathType(_originalValue, valueType, cgType);
-                    void * target = [value valueForKeyPathType:cgType];
-                    TTCGModel * cgmoedel = [[TTCGModel alloc] initWithOriginal:original target:target keyPathTyep:cgType];
-                    self.cgModel = cgmoedel;
-
-                }
-
-                break;
+                NSString * var     = [NSString stringWithFormat:@"_%@", key];
+                Ivar ivar          = class_getInstanceVariable([targetObj class], [var UTF8String]);
+                _originalValue = [targetObj getValueInIvar:ivar valueType:_valueType];
+                _varAddress = [targetObj getIvarHead:ivar];
             }
 
-            targetObj = [targetObj valueForKey:key];
-            NSAssert1(targetObj != nil, @"the value for key %@ could not be nil.", key);
+
+            if (i == keys.count - 1) {
+
+                _targetValue = [self.value valueForBaseType:_valueType];
+
+            } else {
+
+                CGKeyPathType cgType = CGTypeForKey([keys.lastObject UTF8String]);
+
+                NSAssert(cgType != CGKeyPathTypeInvalid, @"the key %@ does not exist", keys.lastObject);
+
+                void * original = CGValueForValueBaseTypeKeyPathType(_originalValue, valueType, cgType);
+                void * target = [self.value valueForKeyPathType:cgType];
+                TTCGModel * cgmoedel = [[TTCGModel alloc] initWithOriginal:original target:target keyPathTyep:cgType];
+                self.cgModel = cgmoedel;
+
+            }
+
+            break;
         }
-        
+
+        targetObj = [targetObj valueForKey:key];
+        NSAssert1(targetObj != nil, @"the value for key %@ could not be nil.", key);
     }
 
-    return self;
 }
 
 
-+(instancetype) animationModelWithObj:(id)obj value:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion {
-
-    return [[self alloc] initWithObj:obj value:value keyPath:keyPath duration:duration inQueue:queue progress:progress completion:completion];
-}
 
 - (void) animation {
 

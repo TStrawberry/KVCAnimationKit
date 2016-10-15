@@ -8,6 +8,7 @@
 
 #import "TTDisplayLink.h"
 #import "TTAnimationModel.h"
+#import "TTAnimationModel.h"
 
 @interface TTDisplayLink() <TTAnimationModelDelegate>
 
@@ -68,22 +69,24 @@
     [self.animationModels makeObjectsPerformSelector:@selector(animation)];
 }
 
--(void) updateAnimationDataForObj:(id)obj value:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion{
+-(void) updateAnimationModel:(TTAnimationModel *)animationModel {
 
-    NSUInteger hash = [keyPath hash];
+    NSUInteger hash = [animationModel.keyPath hash];
     for (TTAnimationModel * model in self.animationModels) {
         if (model.hashValue == hash) {
-            NSLog(@"正在处理%@", keyPath);
+
+            #ifdef DEBUG
+            NSLog(@"正在处理%@", animationModel.keyPath);
+            #endif
+
             return;
         }
     }
-    
-    TTAnimationModel * model = [TTAnimationModel animationModelWithObj:obj value:value keyPath:keyPath duration:duration inQueue:queue progress:progress completion:completion];
-    model.hashValue = [keyPath hash];
-    model.delegate = self;
-    [self.animationModels addObject:model];
 
+    animationModel.delegate = self;
+    [self.animationModels addObject:animationModel];
 }
+
 
 -(void)dealloc {
 

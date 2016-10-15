@@ -10,10 +10,12 @@
 #import <objc/runtime.h>
 #import "GlobleEnum.h"
 
+@class TTAnimationModel;
+
 @interface NSObject (Extension)
 
 
--(void) updateAnimationDataForValue:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion;
+-(void) updateAnimationDataForConfig:(TTAnimationModel *)animationModel;
 
 -(Ivar) ivarKeyPath:(NSString *)keyPath;
 -(TTBaseType)ivarTypeForName:(NSString *)name;

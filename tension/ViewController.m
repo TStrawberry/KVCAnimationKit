@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 
-#import "TTViewController.h"
 #import "KVCAnimationKit.h"
 
 @interface ViewController ()
@@ -22,18 +21,21 @@
 
 @implementation ViewController
 
+-(void)viewDidLoad {
+
+    [super viewDidLoad];
+}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 
-    [[[[self.orangeView setValue:[NSValue valueWithCGSize:CGSizeMake(300, 200)] forKeyPath:@"bounds.size" duraion:2.0] withProgress:^(double progress, id currenValue) {
-
+    [[[[self.orangeView setValue:[NSValue valueWithCGSize:CGSizeMake(300, 200)] forKeyPath:@"bounds.size" duraion:2] withProgress:^(double progress, id currenValue) {
         NSLog(@"%@", currenValue);
     }] withCompletion:^{
         NSLog(@"withCompletion");
     }] commit];
     
-    [[self.orangeView setValue:[NSValue valueWithCGSize:CGSizeMake(300, 200)] forKeyPath:@"bounds.size" duraion:2.0] commit];
-    [[self setValue:@400 forKeyPath:@"orangeView.center.y" duraion:1.5] commit];
-    [[self setValue:@0.2 forKeyPath:@"blueView.alpha" duraion:2.0] commit];
+    [[self setValue:@400 forKeyPath:@"orangeView.center.y" duraion:2.6] commit];
+    [[self setValue:@0.2 forKeyPath:@"blueView.alpha" duraion:1.7] commit];
     [[self setValue:[NSValue valueWithCGPoint:CGPointMake(120, 70)] forKeyPath:@"redView.frame.origin" duraion:3.0] commit];
     [[[self setValue:@130 forKeyPath:@"blackView.frame.origin.x" duraion:1.5] withCompletion:^{
         NSLog(@"*********");

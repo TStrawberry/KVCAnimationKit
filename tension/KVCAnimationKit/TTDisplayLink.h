@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NSObject+Extension.h"
+@class TTAnimationModel;
 
 @interface TTDisplayLink : NSObject
 
@@ -15,7 +16,7 @@
 
 +(instancetype)displayLinkWithTarget:(id)target selector:(SEL)sel;
 
--(void) updateAnimationDataForObj:(id)obj value:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion;
+-(void) updateAnimationModel:(TTAnimationModel *)animationModel;
 
 -(void) animation;
 

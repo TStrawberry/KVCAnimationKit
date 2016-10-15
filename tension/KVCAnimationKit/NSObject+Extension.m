@@ -11,8 +11,6 @@
 #import "TTDisplayLink.h"
 #import "TTAnimationModel.h"
 
-
-
 #define StatementVoidPointer(target) void * target = NULL
 
 #define CopyValueToTarget(ObjType, type, ValuePrefix, target)   type value = [(ObjType *)self ValuePrefix##Value]; \
@@ -44,9 +42,9 @@ extern unsigned int BKDRHash(const char* str);
     return displayLink;
 }
 
--(void) updateAnimationDataForValue:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion {
+-(void) updateAnimationDataForConfig:(TTAnimationModel *)animationModel {
 
-    [self.displayLink updateAnimationDataForObj:self value:value keyPath:keyPath duration:duration inQueue:queue progress:progress completion:completion];
+    [self.displayLink updateAnimationModel:animationModel];
 
     if (self.displayLink.paused) {
         self.displayLink.paused = NO;
@@ -62,6 +60,7 @@ extern unsigned int BKDRHash(const char* str);
 
     objc_setAssociatedObject(self, DISPLAY_LINK_NAME, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
 
 
 

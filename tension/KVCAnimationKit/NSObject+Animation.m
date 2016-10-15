@@ -13,17 +13,27 @@
 
 @implementation NSObject (Animation)
 
--(TTExtraConfig *)  setValue:(id)value
-       forKeyPath:(NSString *)keyPath
-          duraion:(NSTimeInterval)duration {
+-(TTExtraConfig *) setValue:(id)value
+               forKeyPath:(NSString *)keyPath
+                  duraion:(NSTimeInterval)duration {
 
     TTExtraConfig * extraConfig = [[TTExtraConfig alloc] init];
     [extraConfig setValue:value forKey:@"value"];
     [extraConfig setValue:keyPath forKey:@"keyPath"];
     [extraConfig setValue:@(duration) forKey:@"duration"];
     [extraConfig setValue:self forKey:@"animationObj"];
-    
+
     return extraConfig;
 }
+
+//-(TTExtraConfig *) setValues:(NSArray *)values
+//                forKeyPath:(NSString *)keyPath
+//                      time:(NSArray *)keyTimes {
+//
+//
+//
+//
+//}
+
 
 @end

@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import "NSObject+Extension.h"
 
+@class TTAnimationConfig;
+
 @class TTAnimationModel;
 
 @protocol TTAnimationModelDelegate <NSObject>
@@ -20,11 +22,20 @@
 
 @interface TTAnimationModel : NSObject
 
+@property(nonatomic, copy) NSString * keyPath;
+@property(nonatomic, strong) id value;
+@property(nonatomic, weak) id animationObj;
+@property(nonatomic, assign) NSTimeInterval animationDuration;
+@property(nonatomic, strong) NSOperationQueue * queue;
+@property(nonatomic, copy) void (^progress)(double, id);
+@property(nonatomic, copy) void (^completion)(void);
+
+
+
 @property(nonatomic, assign) NSUInteger hashValue;
 @property(nonatomic, weak) id <TTAnimationModelDelegate> delegate;
 
-+ (instancetype) animationModelWithObj:(id)obj value:(id)value keyPath:(NSString *)keyPath duration:(NSTimeInterval)duration inQueue:(NSOperationQueue *)queue progress:(void(^)(double progress, id currenValue))progress completion:(void(^)(void))completion;
-
+- (void)initialData;
 - (void) animation;
 
 @end

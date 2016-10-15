@@ -12,13 +12,13 @@
 
 @interface NSObject (Animation)
 
--(TTExtraConfig *)  setValue:(id)value
+-(TTExtraConfig *) setValue:(id)value
        forKeyPath:(NSString *)keyPath
           duraion:(NSTimeInterval)duration;
 
-/**
- 用于对动画数据进行清理, 如果确定不需要再调用以上接口了, 应该手动调用此方法.
- */
-//-(void) invalidateAnimationData;
+-(TTExtraConfig *) setValues:(NSArray *)values
+                 forKeyPath:(NSString *)keyPath
+                    time:(NSArray *)keyTimes;
+
 
 @end

@@ -7,8 +7,8 @@
 //
 
 #import "TTExtraConfig.h"
-
 #import "NSObject+Extension.h"
+#import "TTAnimationModel.h"
 
 @interface TTExtraConfig()
 
@@ -44,9 +44,30 @@
     return self;
 }
 
+- (NSOperationQueue *)queue {
+
+    if (_queue == nil) {
+        return [NSOperationQueue currentQueue];
+    }
+
+    return _queue;
+}
+
 -(void) commit {
-    
-    [self.animationObj updateAnimationDataForValue:_value keyPath:_keyPath duration:_duration inQueue:_queue == nil ? [NSOperationQueue currentQueue] : _queue progress:_progress completion:_completion];
+
+    TTAnimationModel * animationModel = [[TTAnimationModel alloc] init];
+
+    animationModel.animationObj = self.animationObj;
+    animationModel.keyPath = self.keyPath;
+    animationModel.value = self.value;
+    animationModel.animationDuration = self.duration;
+    animationModel.progress = self.progress;
+    animationModel.completion = self.completion;
+    animationModel.queue = self.queue;
+
+    [animationModel initialData];
+
+    [self.animationObj updateAnimationDataForConfig:animationModel];
 }
 
 @end
