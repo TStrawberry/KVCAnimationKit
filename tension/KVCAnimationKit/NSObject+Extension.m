@@ -34,10 +34,12 @@ extern unsigned int BKDRHash(const char* str);
 
 -(TTDisplayLink *)displayLink {
 
-    TTDisplayLink * displayLink = objc_getAssociatedObject(self, DISPLAY_LINK_NAME);
+
+    UIApplication * application = [UIApplication sharedApplication];
+    TTDisplayLink * displayLink = objc_getAssociatedObject(application, DISPLAY_LINK_NAME);
     if (displayLink == nil) {
         displayLink = [TTDisplayLink displayLinkWithTarget:self selector:@selector(updateKeyPath:)];
-        objc_setAssociatedObject(self, DISPLAY_LINK_NAME, displayLink, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(application, DISPLAY_LINK_NAME, displayLink, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return displayLink;
 }
@@ -58,7 +60,7 @@ extern unsigned int BKDRHash(const char* str);
 
 -(void) invalidateAnimationData {
 
-    objc_setAssociatedObject(self, DISPLAY_LINK_NAME, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject([UIApplication sharedApplication], DISPLAY_LINK_NAME, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 

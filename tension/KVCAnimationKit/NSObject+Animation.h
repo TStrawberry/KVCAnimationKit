@@ -16,9 +16,4 @@
        forKeyPath:(NSString *)keyPath
           duraion:(NSTimeInterval)duration;
 
--(TTExtraConfig *) setValues:(NSArray *)values
-                 forKeyPath:(NSString *)keyPath
-                    time:(NSArray *)keyTimes;
-
-
 @end

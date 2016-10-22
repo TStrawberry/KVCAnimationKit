@@ -26,14 +26,6 @@
     return extraConfig;
 }
 
-//-(TTExtraConfig *) setValues:(NSArray *)values
-//                forKeyPath:(NSString *)keyPath
-//                      time:(NSArray *)keyTimes {
-//
-//
-//
-//
-//}
 
 
 @end
