@@ -14,7 +14,6 @@
 
 @interface NSObject (Extension)
 
-
 -(void) updateAnimationDataForConfig:(TTAnimationModel *)animationModel;
 
 -(Ivar) ivarKeyPath:(NSString *)keyPath;

@@ -28,7 +28,7 @@
 @property(nonatomic, strong) TTCGModel * cgModel;
 
 @property(nonatomic, assign) TTBaseType valueType;
-@property(nonatomic, copy) NSString * key;
+@property(nonatomic, copy) NSString * lastKey;
 @property(nonatomic, weak) id objOfIvar;
 
 @property(nonatomic, assign) NSUInteger timeCounter;
@@ -37,24 +37,20 @@
 
 @implementation TTAnimationModel
 
--(void)setKeyPath:(NSString *)keyPath {
-
-    _keyPath = keyPath;
-    self.hashValue = [keyPath hash];
-}
-
 -(void)initialData {
 
     id targetObj = _animationObj;
 
     // 所有的key
     NSArray <NSString *> * keys = [self.keyPath componentsSeparatedByString:@"."];
+    NSInteger charactorsCount = 0;
+    _lastKey = keys.lastObject;
 
     for(int i = 0; i < keys.count; i++) {
 
         NSString * key = keys[i];
-
         self.objOfIvar     = targetObj;
+
         TTBaseType valueType = TTBaseTypeInvalid;
         BOOL isProperty = NO;
         valueType = [targetObj typeWithKey:key isProperty:&isProperty];
@@ -86,36 +82,43 @@
             if (i == keys.count - 1) {
 
                 _targetValue = [self.value valueForBaseType:_valueType];
-
             } else {
 
                 CGKeyPathType cgType = CGTypeForKey([keys.lastObject UTF8String]);
-
                 NSAssert(cgType != CGKeyPathTypeInvalid, @"the key %@ does not exist", keys.lastObject);
-
                 void * original = CGValueForValueBaseTypeKeyPathType(_originalValue, valueType, cgType);
                 void * target = [self.value valueForKeyPathType:cgType];
                 TTCGModel * cgmoedel = [[TTCGModel alloc] initWithOriginal:original target:target keyPathTyep:cgType];
                 self.cgModel = cgmoedel;
-
             }
+
+            self.lastKey = [_keyPath substringFromIndex:charactorsCount];
 
             break;
         }
 
+        charactorsCount += (key.length + 1);
         targetObj = [targetObj valueForKey:key];
         NSAssert1(targetObj != nil, @"the value for key %@ could not be nil.", key);
     }
-
 }
 
+-(NSUInteger)hashValue {
 
+    if (_hashValue == 0) {
+        _hashValue = [NSString stringWithFormat:@"%p.%@", _objOfIvar, _lastKey].hash;
+    }
+    return _hashValue;
+}
+
+- (BOOL) isEqualToModel:(TTAnimationModel *)model {
+
+    return self.hashValue == model.hashValue;
+}
 
 - (void) animation {
 
-
     __weak typeof(self) weakSelf = self;
-
     [self.queue addOperationWithBlock:^{
 
         _timeCounter += 1;
@@ -126,15 +129,16 @@
             if (_completion) {
                 _completion();
             }
-
-            [weakSelf.delegate animationModelDidFinish:self];
+            [weakSelf.delegate animationModelDidFinish:weakSelf];
             return;
         }
-        
-        double progress = _timeCounter / (_animationDuration * 60.0);
-        [weakSelf setCurrentValueForProgress:progress];
-    }];
 
+        if (_timeCounter % self.frameInterval == 0) {
+            double progress = _timeCounter / (_animationDuration * 60.0);
+            [weakSelf setCurrentValueForProgress:progress];
+        }
+
+    }];
 }
 
 -(void) setCurrentValueForProgress:(double)progress {
@@ -368,7 +372,6 @@
     }
 
 }
-
 
 -(void)dealloc {
 

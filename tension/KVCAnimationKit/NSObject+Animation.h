@@ -13,7 +13,9 @@
 @interface NSObject (Animation)
 
 -(TTExtraConfig *) setValue:(id)value
-       forKeyPath:(NSString *)keyPath
-          duraion:(NSTimeInterval)duration;
+               forKeyPath:(NSString *)keyPath
+                  duraion:(NSTimeInterval)duration;
+
+
 
 @end

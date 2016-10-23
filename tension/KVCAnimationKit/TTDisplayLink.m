@@ -8,7 +8,6 @@
 
 #import "TTDisplayLink.h"
 #import "TTAnimationModel.h"
-#import "TTAnimationModel.h"
 
 @interface TTDisplayLink() <TTAnimationModelDelegate>
 
@@ -20,7 +19,7 @@
 @implementation TTDisplayLink
 
 -(instancetype) initWithTarget:(id)target selector:(SEL)sel {
-
+    
     if (self = [super init]) {
 
         self.displayLink = [CADisplayLink displayLinkWithTarget:target selector:sel];
@@ -36,7 +35,7 @@
 -(NSMutableArray *)animationModels {
 
     if (_animationModels == nil) {
-        _animationModels = (NSMutableArray *)[NSMutableArray array];
+        _animationModels = [NSMutableArray array];
     }
     return _animationModels;
 }
@@ -71,14 +70,11 @@
 
 -(void) updateAnimationModel:(TTAnimationModel *)animationModel {
 
-    NSUInteger hash = [animationModel.keyPath hash];
     for (TTAnimationModel * model in self.animationModels) {
-        if (model.hashValue == hash) {
-
+        if ([animationModel isEqualToModel:model]) {
             #ifdef DEBUG
-            NSLog(@"正在处理%@", animationModel.keyPath);
+            NSLog(@"同时存在多处对 <%@ -- %@> 的处理,将随机选择一个,其他操作将丢弃。", animationModel.animationObj, animationModel.keyPath);
             #endif
-
             return;
         }
     }

@@ -17,30 +17,27 @@
 @property (weak, nonatomic) IBOutlet UIView *blueView;
 @property (weak, nonatomic) IBOutlet UIView *blackView;
 
+
 @end
 
 @implementation ViewController
 
--(void)viewDidLoad {
-
-    [super viewDidLoad];
-}
-
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 
-    [[[[self.orangeView setValue:[NSValue valueWithCGSize:CGSizeMake(300, 200)] forKeyPath:@"bounds.size" duraion:2] withProgress:^(double progress, id currenValue) {
-        NSLog(@"%@", currenValue);
-    }] withCompletion:^{
-        NSLog(@"withCompletion");
-    }] commit];
-    
-    [[self setValue:@400 forKeyPath:@"orangeView.center.y" duraion:2.6] commit];
-    [[self setValue:@0.2 forKeyPath:@"blueView.alpha" duraion:1.7] commit];
-    [[self setValue:[NSValue valueWithCGPoint:CGPointMake(120, 70)] forKeyPath:@"redView.frame.origin" duraion:3.0] commit];
-    [[[self setValue:@130 forKeyPath:@"blackView.frame.origin.x" duraion:1.5] withCompletion:^{
+    [[[[[self.orangeView setValue:@400 forKeyPath:@"frame.origin.y" duraion:2] withFrameInterval:2]
+       withProgress:^(double progress, id currenValue) {
+
+           NSLog(@"%f -- %@", progress, currenValue);
+           
+    }] withCompletion:nil] commit];
+
+    [[self setValue:@0.2 forKeyPath:@"blueView.alpha" duraion:2] commit];
+    [[[self setValue:@130 forKeyPath:@"blackView.frame.origin.x" duraion:2] withCompletion:^{
         NSLog(@"*********");
     }] commit];
 
+    [[[self setValue:[NSValue valueWithCGPoint:CGPointMake(120, 70)] forKeyPath:@"redView.frame.origin" duraion:2.0] withDelay:1.0] commit];
+    
 }
 
 

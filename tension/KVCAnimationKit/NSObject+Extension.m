@@ -19,8 +19,8 @@
                                                                 memcpy(target, &value, size);
 
 static char * DISPLAY_LINK_NAME = "displayLink";
-
-
+static dispatch_semaphore_t lockSignal;
+static dispatch_time_t overTime;
 
 @interface NSObject()
 
@@ -34,10 +34,11 @@ extern unsigned int BKDRHash(const char* str);
 
 -(TTDisplayLink *)displayLink {
 
-
     UIApplication * application = [UIApplication sharedApplication];
+
     TTDisplayLink * displayLink = objc_getAssociatedObject(application, DISPLAY_LINK_NAME);
     if (displayLink == nil) {
+
         displayLink = [TTDisplayLink displayLinkWithTarget:self selector:@selector(updateKeyPath:)];
         objc_setAssociatedObject(application, DISPLAY_LINK_NAME, displayLink, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
@@ -46,11 +47,20 @@ extern unsigned int BKDRHash(const char* str);
 
 -(void) updateAnimationDataForConfig:(TTAnimationModel *)animationModel {
 
-    [self.displayLink updateAnimationModel:animationModel];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        lockSignal = dispatch_semaphore_create(1);
+        overTime = dispatch_time(DISPATCH_TIME_NOW, 3 * NSEC_PER_SEC);
+    });
 
-    if (self.displayLink.paused) {
-        self.displayLink.paused = NO;
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(animationModel.delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_semaphore_wait(lockSignal, overTime);
+        [self.displayLink updateAnimationModel:animationModel];
+        if (self.displayLink.paused) {
+            self.displayLink.paused = NO;
+        }
+        dispatch_semaphore_signal(lockSignal);
+    });
 }
 
 -(void) updateKeyPath:(CADisplayLink *)displayLink {
@@ -62,9 +72,6 @@ extern unsigned int BKDRHash(const char* str);
 
     objc_setAssociatedObject([UIApplication sharedApplication], DISPLAY_LINK_NAME, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
-
-
 
 -(Ivar) ivarKeyPath:(NSString *)keyPath {
 

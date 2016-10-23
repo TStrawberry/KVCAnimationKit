@@ -119,7 +119,6 @@
 }
 
 -(void)dealloc {
-
     free(_originalValue);
     free(_targetValue);
 }
